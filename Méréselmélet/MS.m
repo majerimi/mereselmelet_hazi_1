@@ -1,8 +1,8 @@
 function [p,v] = MS(A,B,C,w)
-ma=2; mb=1; mc=0; sa=.2; sb=.1;
-sc=.3; sw=.1;
-t0=5;dt=.9;f0=50/1000;
-N=[3 30 300];
+N=[3 10 100];
+ma=1; mb=2; mc=0; sa=.1; sb=.2;
+sc=.1; sw=.2;
+t0=10;dt=3;f0=50/1000;
 p=zeros(3,3); % helyfoglalás a becsl?knek
 v=zeros(3,3); % helyfoglalás a varianciáknak
 Sa=diag([sa^2 sb^2 sc^2]); % Sigma_aa mátrix

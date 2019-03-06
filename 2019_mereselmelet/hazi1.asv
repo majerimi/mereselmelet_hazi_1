@@ -49,11 +49,7 @@ average_ABC_ls = mean(ABC_ls,3);
 % 1.4: MS becslok varianciaja:
 variance_ABC_ls = var(ABC_ls,[],3);
 
-%% 1.5-os feladat
-
-[var_noise,var_var_noise] = noise_variancie(A1,B1,C1,w1, abc_ms);
-
-%% 1.7-es feladat
+%% 1.5-os 
 
 
 
