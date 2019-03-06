@@ -1,4 +1,4 @@
-function [a ,e] = recLS(a0,P0,u,z)
+function [a ,G, e] = recLS(a0,P0,u,z)
 N=900;
 
 % kezdeti értékek beállítása
