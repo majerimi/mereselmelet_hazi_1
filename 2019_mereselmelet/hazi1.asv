@@ -44,13 +44,52 @@ average_ABC_ms = mean(ABC_ms,3);
 % 1.3: MS becslok varianciaja:
 variance_ABC_ms = var(ABC_ms,[],3);
 
-% 1.4: MS becslok atlaga:
+% 1.4: LS becslok atlaga:
 average_ABC_ls = mean(ABC_ls,3);
-% 1.4: MS becslok varianciaja:
+% 1.4: LS becslok varianciaja:
 variance_ABC_ls = var(ABC_ls,[],3);
 
-%% 1.5-os 
+%% 1.5-os feladat
 
+[var_noise,CRLB] = noise_variancie(A1,B1,C1,w1,abc_ms);
+
+%% 1.6-os feladat
+SampleNum = 100;
+offset = (1./(2*dt))/SampleNum;
+f0_a=0:offset:offset*(SampleNum-1);
+
+A_COMM=zeros(2,3);
+CRLB_a=zeros(3,100);
+
+for j = 1:3
+    for i = 1:SampleNum
+        A1_1=normrnd(ma,sa);
+        B1_1=normrnd(mb,sb);
+        C1_1=normrnd(mc,sc);
+        w1_1=normrnd(0,sw,[1,max(N)]);
+        [abc_ms_1,cov_ms_1] = MS(A1_1,B1_1,C1_1,w1_1);
+        A_COMM(2,j) = sqrt(abc_ms_1(1,1).^2 + abc_ms_1(2,1).^2);
+        CRLB_a(j,i) = (3 * sw.^2)./(((A_COMM(2,j)).^2) * (pi.^2) * N(j) * (N(j) - 1) * (2*N(j) - 1)); 
+    end 
+end
+
+subplot(3,1,1); 
+plot(f0_a,CRLB_a(1,:));
+title('N = 3');
+xlabel('CRLB');
+ylabel('f0');
+
+subplot(3,1,2); 
+plot(f0_a,CRLB_a(2,:));
+title('N = 10');
+xlabel('CRLB');
+ylabel('f0');
+
+subplot(3,1,3); 
+plot(f0_a,CRLB_a(3,:));
+title('N = 100');
+xlabel('CRLB');
+ylabel('f0');
 
 
 
